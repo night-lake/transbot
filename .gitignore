@@ -1,3 +1,4 @@
 node_modules
 dist
 store.sqlite3
+.env
