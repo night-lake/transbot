@@ -1,26 +1,15 @@
 {
-  "compilerOptions": {
-    // For Cloudflare Workers
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "lib": ["esnext"],
-    "types": ["@cloudflare/workers-types"],
-
-    // For Slshx JSX
-    "jsx": "react",
-    "jsxFactory": "createElement",
-    "jsxFragmentFactory": "Fragment",
-
-    // Required by esbuild
-    "isolatedModules": true,
-
-    "noEmit": true,
-    "strict": true,
-    "esModuleInterop": true,
-  },
-  "include": [
-    "src",
-    "types"
-  ]
+    "compilerOptions": {
+        "target": "es2021",
+        "module": "commonjs",
+        "allowJs": true,
+        "outDir": "dist",
+        "moduleResolution": "node",
+        "baseUrl": "src",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "sourceMap": true
+    }
 }
