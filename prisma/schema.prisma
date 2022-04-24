@@ -17,8 +17,3 @@ model TransitionGoal {
 
   @@index([authorid(sort: Asc)])
 }
-
-model AttachmentURLStore {
-  attachmentId  Int    @id @unique
-  attachmentURL String
-}
