@@ -1,8 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["extendedIndexes"]
 }
 
 datasource db {
@@ -16,4 +14,6 @@ model TransitionGoal {
   title     String
   imageURL  String
   createdAt DateTime @default(now())
+
+  @@index([authorid(sort: Asc)])
 }

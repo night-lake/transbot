@@ -2,3 +2,4 @@ node_modules
 dist
 store.sqlite3
 .env
+store.sqlite3-journal
