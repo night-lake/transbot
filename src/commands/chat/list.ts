@@ -12,7 +12,7 @@ export default new SlashCommand(
         run: async interaction => {
             const { goalId } = await db.transitionGoal.findFirst({
                 where: {
-                    authorid: interaction.user.id
+                    authorId: interaction.user.id
                 },
                 orderBy: {
                     goalId: 'asc'

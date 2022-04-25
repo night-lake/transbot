@@ -128,7 +128,8 @@ export default class PaginatedTransitionGoalsList extends Page<GoalsListData, Go
                     },
                     footer: {
                         text: `Goal #${goal.goalId}`
-                    }
+                    },
+                    timestamp: goal.createdAt
                 }
             ],
             components: firstGoalId === lastGoalId ? [] : [components]
