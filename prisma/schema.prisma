@@ -17,3 +17,12 @@ model TransitionGoal {
 
   @@index([authorid(sort: Asc)])
 }
+
+model PaginationState {
+  messageId   String @unique
+  pageId      String
+  stateString String
+  messageData String
+
+  @@index([messageId])
+}

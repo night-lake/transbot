@@ -10,6 +10,9 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "jsx": "react",
+        "jsxFactory": "createInteractable",
+        "jsxFragmentFactory": "null"
     }
 }
