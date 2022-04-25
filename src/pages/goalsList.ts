@@ -20,7 +20,7 @@ export default class PaginatedTransitionGoalsList extends Page<GoalsListData, Go
         this.client.logger.debug(`hi ${sort}`);
         return db.transitionGoal.findFirst({
             where: {
-                authorid: this.state.userId
+                authorId: this.state.userId
             },
             orderBy: {
                 goalId: sort
@@ -31,7 +31,7 @@ export default class PaginatedTransitionGoalsList extends Page<GoalsListData, Go
         });
     }
 
-    async flipNext(interaction: ButtonInteraction) {
+    async handleUserNotEqual(interaction: ButtonInteraction) {
         if (interaction.user.id !== this.state.userId) {
             return interaction.reply({
                 embeds: [
@@ -39,12 +39,17 @@ export default class PaginatedTransitionGoalsList extends Page<GoalsListData, Go
                         title: "You can't use this",
                         color: 0xffaebd
                     }
-                ]
+                ],
+                ephemeral: true
             });
         }
+    }
+    async flipNext(interaction: ButtonInteraction) {
+        this.handleUserNotEqual(interaction);
+
         const { goalId } = await db.transitionGoal.findFirst({
             where: {
-                authorid: interaction.user.id,
+                authorId: interaction.user.id,
                 goalId: {
                     gt: this.state.goalId
                 }
@@ -61,9 +66,11 @@ export default class PaginatedTransitionGoalsList extends Page<GoalsListData, Go
     }
 
     async flipBack(interaction: ButtonInteraction) {
+        this.handleUserNotEqual(interaction);
+
         const { goalId } = await db.transitionGoal.findFirst({
             where: {
-                authorid: interaction.user.id,
+                authorId: interaction.user.id,
                 goalId: {
                     lt: this.state.goalId
                 }
@@ -80,6 +87,10 @@ export default class PaginatedTransitionGoalsList extends Page<GoalsListData, Go
     }
 
     async render(): Promise<RenderedPage> {
+        if (!this.getGoalId('asc')) {
+            return;
+        }
+
         const { goalId: firstGoalId } = await this.getGoalId('asc');
         const { goalId: lastGoalId } = await this.getGoalId('desc');
 

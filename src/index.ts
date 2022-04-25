@@ -55,4 +55,15 @@ process.on('unhandledRejection', (err: Error) => {
     logger.error({ type: err.constructor.name, message: err.message, stack: err.stack.split('\n') });
 });
 
+process.on('uncaughtException', (err: Error) => {
+    logger.error({ type: err.constructor.name, message: err.message, stack: err.stack.split('\n') });
+});
+
+process.on('SIGTERM', () => {
+    logger.debug('Bot is exiting');
+    logger.debug('Closing DB Connection');
+    db.$disconnect();
+    process.exit(0);
+});
+
 client.login();

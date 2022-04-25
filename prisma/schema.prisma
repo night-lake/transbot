@@ -10,12 +10,12 @@ datasource db {
 
 model TransitionGoal {
   goalId    Int      @id @unique @default(autoincrement())
-  authorid  String
+  authorId  String
   title     String
   imageURL  String
   createdAt DateTime @default(now())
 
-  @@index([authorid(sort: Asc)])
+  @@index([goalId(sort: Asc), authorId(sort: Asc), title(sort: Asc)])
 }
 
 model PaginationState {
