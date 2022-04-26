@@ -32,21 +32,21 @@ export default class PaginatedTransitionGoalsList extends Page<GoalsListData, Go
     }
 
     async handleUserNotEqual(interaction: ButtonInteraction) {
-        if (interaction.user.id !== this.state.userId) {
-            return interaction.reply({
-                embeds: [
-                    {
-                        title: "You can't use this",
-                        color: 0xffaebd
-                    }
-                ],
-                ephemeral: true
-            });
-        }
+        return interaction.reply({
+            embeds: [
+                {
+                    title: "You can't use this",
+                    color: 0xffaebd
+                }
+            ],
+            ephemeral: true
+        });
     }
 
     async flipNext(interaction: ButtonInteraction) {
-        this.handleUserNotEqual(interaction);
+        if (interaction.user.id !== this.state.userId) {
+            return this.handleUserNotEqual(interaction);
+        }
 
         const { goalId } = await db.transitionGoal.findFirst({
             where: {
@@ -67,7 +67,9 @@ export default class PaginatedTransitionGoalsList extends Page<GoalsListData, Go
     }
 
     async flipBack(interaction: ButtonInteraction) {
-        this.handleUserNotEqual(interaction);
+        if (interaction.user.id !== this.state.userId) {
+            return this.handleUserNotEqual(interaction);
+        }
 
         const { goalId } = await db.transitionGoal.findFirst({
             where: {
