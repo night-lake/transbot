@@ -37,11 +37,11 @@ export default new SlashCommand(
                 });
             }
 
-            const preExistingGoal = await db.transitionGoal.findFirst({
-                where: { title: options.title, imageURL: options.image_url, authorid: interaction.user.id }
+            const existingGoal = await db.transitionGoal.findFirst({
+                where: { title: options.title, imageURL: options.image_url, authorId: interaction.user.id }
             });
 
-            if (preExistingGoal) {
+            if (existingGoal) {
                 return interaction.reply({
                     embeds: [
                         {
@@ -54,7 +54,7 @@ export default new SlashCommand(
             }
 
             const newGoal = await db.transitionGoal.create({
-                data: { authorid: interaction.user.id, imageURL: options.image_url, title: options.title }
+                data: { authorId: interaction.user.id, imageURL: options.image_url, title: options.title }
             });
 
             interaction.reply({
@@ -67,7 +67,8 @@ export default new SlashCommand(
                         },
                         footer: {
                             text: `Goal #${newGoal.goalId}`
-                        }
+                        },
+                        timestamp: newGoal.createdAt
                     }
                 ]
             });
