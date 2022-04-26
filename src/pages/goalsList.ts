@@ -44,6 +44,7 @@ export default class PaginatedTransitionGoalsList extends Page<GoalsListData, Go
             });
         }
     }
+
     async flipNext(interaction: ButtonInteraction) {
         this.handleUserNotEqual(interaction);
 

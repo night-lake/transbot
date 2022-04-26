@@ -70,12 +70,11 @@ export default new SlashCommand(
             });
         },
         autocomplete: async (interaction, focusedName, focusedValue) => {
-            if (focusedName === 'title') {
+            if (focusedName === 'title' && typeof focusedValue === 'string') {
                 const goals = await db.transitionGoal.findMany({
                     select: { title: true },
-                    // @ts-expect-error i hate number autocompletes
-                    where: { authorid: interaction.user.id, title: { contains: focusedValue } },
-                    limit: 25
+                    where: { authorId: interaction.user.id, title: { contains: focusedValue } },
+                    take: 25
                 });
 
                 const preparedGoals = goals.map(goal => ({
