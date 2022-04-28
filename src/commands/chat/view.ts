@@ -11,7 +11,8 @@ export default new SlashCommand(
                 name: 'title',
                 description: 'The name of the transition goal',
                 type: ApplicationCommandOptionTypes.STRING,
-                autocomplete: true
+                autocomplete: true,
+                required: true
             }
         ] as const
     },

@@ -10,12 +10,14 @@ export default new SlashCommand(
             {
                 name: 'image_url',
                 description: 'The url to the image, prefferably a Discord CDN image.',
-                type: ApplicationCommandOptionTypes.STRING
+                type: ApplicationCommandOptionTypes.STRING,
+                required: true
             },
             {
                 name: 'title',
                 description: 'The name of the transition goal',
-                type: ApplicationCommandOptionTypes.STRING
+                type: ApplicationCommandOptionTypes.STRING,
+                required: true
             }
         ] as const
     },
