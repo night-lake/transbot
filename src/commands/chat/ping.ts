@@ -1,5 +1,4 @@
 import { SlashCommand } from 'slashasaurus';
-import { db } from '../../db';
 
 export default new SlashCommand(
     {

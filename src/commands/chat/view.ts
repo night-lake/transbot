@@ -17,22 +17,6 @@ export default new SlashCommand(
     },
     {
         run: async (interaction, _client, options) => {
-            // if (
-            //     !options.image_url.startsWith('https:') &&
-            //     !options.image_url.includes('png') &&
-            //     !options.image_url.includes('jpg')
-            // ) {
-            //     return interaction.reply({
-            //         embeds: [
-            //             {
-            //                 title: "That's not an image",
-            //                 color: 0xffaebd
-            //             }
-            //         ],
-            //         ephemeral: true
-            //     });
-            // }
-
             const goal = await db.transitionGoal.findFirst({
                 where: { title: options.title, authorId: interaction.user.id }
             });
@@ -48,10 +32,6 @@ export default new SlashCommand(
                     ephemeral: true
                 });
             }
-
-            // const newGoal = await db.transitionGoal.create({
-            //     data: { authorid: interaction.user.id, imageURL: options.image_url, title: options.title }
-            // });
 
             interaction.reply({
                 embeds: [
@@ -73,7 +53,7 @@ export default new SlashCommand(
             if (focusedName === 'title' && typeof focusedValue === 'string') {
                 const goals = await db.transitionGoal.findMany({
                     select: { title: true },
-                    where: { authorId: interaction.user.id, title: { contains: focusedValue } },
+                    where: { authorId: interaction.user.id, title: { startsWith: focusedValue } },
                     take: 25
                 });
 
